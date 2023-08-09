@@ -10,8 +10,6 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    // configure the kernel for the application
-
     public function getProjectDir(): string
     {
         return dirname(__DIR__, 4);

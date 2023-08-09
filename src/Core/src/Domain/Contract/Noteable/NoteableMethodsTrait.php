@@ -14,9 +14,9 @@ trait NoteableMethodsTrait
 
     /**
      * @param string $note
-     * @return $this
+     * @return self
      */
-    public function setNote(string $note): self
+    public function setNote(string $note): static
     {
         $this->note = $note;
 

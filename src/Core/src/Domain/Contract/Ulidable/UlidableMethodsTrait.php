@@ -2,7 +2,7 @@
 
 namespace Core\Domain\Contract\Ulidable;
 
-use Core\Domain\Provider\UlidProvider;
+use Core\Infrastructure\Provider\UlidProvider;
 
 trait UlidableMethodsTrait
 {

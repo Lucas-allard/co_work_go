@@ -1,0 +1,23 @@
+{% block image_label %}{% endblock %}
+
+{% block image_widget %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="d-flex flex-column justify-content-center align-items-center my-3">
+            <label class="image_input align-self-center">
+            <span class="badge rounded-pill btn-my-label-color"
+                  style="position: absolute; transform: translate(1em,-1em)">
+            <i class="far fa-image"></i>
+            <span class="ms-1">{{ "Choose a picture"|trans }}</span>
+        </span>
+                {{ form_widget(form.image, {
+                    'attr': {
+                        'onchange': "changeImgSrcOnInputChange(event)",
+                    }}) }}
+                {# 'accept': form.image.vars.form.vars.errors.form.config.attributes
+                        ["data_collector/passed_options"]["constraints"][0].mimeTypes|join(',') #}
+                <img src="{{ asset((form.vars.value.imageUrl??'')) }}" alt="upload_image"/>
+            </label>
+        {{ form_widget(form.imageUrl) }}
+        {{ form_help(form.image) }}
+    </div>
+{% endblock %}

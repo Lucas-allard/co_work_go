@@ -10,7 +10,7 @@ final class DoctrineConfig
     public static function configure(EntityManagerConfig $emDefault): void
     {
         $emDefault->mapping('<?php echo $domain; ?>')
-        ->type('php')
+        ->type('xml')
         ->dir(dirname(__DIR__).'/Infrastructure/Entity')//self::getDirectoryPath())
         ->prefix('<?php echo $domain; ?>')
         ;

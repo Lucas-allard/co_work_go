@@ -215,6 +215,7 @@ final class MakeDomain extends AbstractMaker
         $config = simplexml_load_file($this->projectDir.'/phpunit.xml.dist');
         if($config){
             $config->testsuites[0]->testsuite[0]->directory[] = new SimpleXMLElement("<directory>src/$domain/tests</directory>");
+            $config->codeCoverage->exclude->directory[] = new SimpleXMLElement("<directory>src/$domain/src/config</directory>");
             $config->saveXML($this->projectDir.'/phpunit.xml.dist');
         }
     }

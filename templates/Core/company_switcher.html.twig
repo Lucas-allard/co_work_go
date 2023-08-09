@@ -1,0 +1,57 @@
+{% extends '@!EasyAdmin/page/login_minimal.html.twig' %}
+{% form_theme form '@!EasyAdmin/symfony-form-themes/bootstrap_5_layout.html.twig' %}
+
+{% block page_title %}{{ 'Company Switcher'|trans }}{% endblock %}
+{% block body_class 'page-login' %}
+{% block wrapper_wrapper %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <style>
+        .img-checkbox input {
+            margin-top: 1em;
+            margin-left: 1em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .img-checkbox input:checked + div , .img-checkbox input:hover + div{
+            -webkit-filter: none;
+            filter: none;
+        }
+
+        .img-checkbox div {
+            -webkit-transition: all 100ms ease-in;
+            -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+            -webkit-filter: brightness(1.2) grayscale(.5) opacity(.7);
+            filter: brightness(1.2) grayscale(.5) opacity(.7);
+        }
+
+        .img-checkbox {
+            font-family: monospace;
+        }
+
+    </style>
+
+    <div>
+        {{ form_label(form.company) }}
+        {{ form_errors(form.company) }}
+        <div class="form-widget img-checkbox d-flex overflow-auto flex-row" style="max-width: 80vw;">
+            {% for choice in form.company.vars.choices %}
+                <label class="mx-2" style="flex: auto;">
+                    <input type="radio" name="company_switcher[company]" value="{{ choice.value }}"/>
+                    <div class="card border-primary mb-3" style="margin-top: -2em;">
+                        <img src="https://eu.ui-avatars.com/api/?size=150&background=random&name={{ choice.data.name }}"
+                             class="rounded" alt="{{ choice.data.name }}"/>
+                        <div class="card-footer">{{ choice.data.name }}</div>
+                    </div>
+                </label>
+            {% endfor %}
+        </div>
+        {{ form_help(form.company) }}
+    </div>
+    {% do form.company.setRendered() %}
+
+    <button type="submit" class="btn btn-primary">{{ 'Save'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}

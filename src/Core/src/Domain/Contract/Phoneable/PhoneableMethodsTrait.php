@@ -36,8 +36,9 @@ trait PhoneableMethodsTrait
     public function setPhoneNumber(?string $phoneNumber): static
     {
         if (is_string($phoneNumber)) {
+
             if (!$this->validePhoneNumber($phoneNumber)) {
-                throw new InvalidPhoneNumberException;
+                throw new InvalidPhoneNumberException($phoneNumber);
             }
         }
         $this->phone = $phoneNumber;

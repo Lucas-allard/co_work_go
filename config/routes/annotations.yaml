@@ -1,0 +1,7 @@
+security:
+  resource: ../../src/Security/src/Presentation/Controller/
+  type: annotation
+
+core:
+  resource: ../../src/Core/src/Presentation/Controller/
+  type: annotation

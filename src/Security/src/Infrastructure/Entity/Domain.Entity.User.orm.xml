@@ -1,0 +1,12 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Security\Domain\Entity\User" table="security_user" repository-class="Security\Infrastructure\Repository\DoctrineUserRepository">
+        <id name="id" type="ulid"/>
+        <field name="enabled" type="boolean"/>
+        <field name="role"/>
+        <field name="companyIds" type="simple_array" nullable="true"/>
+        <embedded name="credentials" class="Security\Domain\ValueObject\Credentials" use-column-prefix="false"/>
+    </entity>
+</doctrine-mapping>

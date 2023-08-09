@@ -9,7 +9,7 @@ final class DoctrineConfig
     public static function configure(EntityManagerConfig $emDefault): void
     {
         $emDefault->mapping('Security')
-        ->type('php')
+        ->type('xml')
         ->dir(dirname(__DIR__).'/Infrastructure/Entity')//self::getDirectoryPath())
         ->prefix('Security')
         ;

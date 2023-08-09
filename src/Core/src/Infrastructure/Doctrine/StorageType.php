@@ -12,7 +12,7 @@ class StorageType extends Type
     /**
      * @throws ConversionException
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
         if ($value === null) {
             return null;
@@ -31,7 +31,7 @@ class StorageType extends Type
     /**
      * @throws ConversionException
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform) : ?SplObjectStorage
     {
         if ($value === null || $value === '') {
             return null;
@@ -51,12 +51,12 @@ class StorageType extends Type
         return $val;
     }
 
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         return $platform->getJsonTypeDeclarationSQL($column);
     }
 
-    public function getName()
+    public function getName() : string
     {
         return 'storage';
     }

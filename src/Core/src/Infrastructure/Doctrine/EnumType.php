@@ -8,7 +8,7 @@ use Doctrine\DBAL\Types\Type;
 
 class EnumType extends Type
 {
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
         if ($value === null) {
             return null;
@@ -20,7 +20,7 @@ class EnumType extends Type
     }
 
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform) : ?object
     {
         if ($value === null || $value === '') {
             return null;
@@ -30,12 +30,12 @@ class EnumType extends Type
         return $class::from($value);
     }
 
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         return $platform->getVarcharTypeDeclarationSQL($column);
     }
 
-    public function getName()
+    public function getName() : string
     {
         return 'enum';
     }

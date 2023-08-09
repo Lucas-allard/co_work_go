@@ -1,0 +1,15 @@
+{% block checkbox_widget %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-check-input')|trim}) -%}
+    {%- set parent_label_class = parent_label_class|default(label_attr.class|default('')) -%}
+    {%- set row_class = 'form-check' -%}
+    {%- if 'checkbox-inline' in parent_label_class %}
+        {% set row_class = row_class ~ ' form-check-inline' %}
+    {% endif -%}
+    {%- if 'checkbox-switch' in parent_label_class %}
+        {% set row_class = row_class ~ ' form-switch' %}
+    {% endif -%}
+    <div class="{{ row_class }} form-switch">
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        {{ form_label(form, null, { widget: ''}) }}
+    </div>
+{% endblock checkbox_widget %}

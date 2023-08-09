@@ -1,0 +1,8 @@
+parameters:
+	level: 4
+	paths:
+		- src
+	excludePaths:
+	    - src/*/tests/*
+	    - src/*/src/config/*
+	    - src/*/src/Infrastructure/Entity/*

@@ -1,0 +1,18 @@
+Security\Domain\Entity\User:
+  properties:
+    id:
+      identifier: true
+  collectionOperations:
+    create:
+      method: POST
+      path: /users
+      input: Security\Application\Command\CreateUser\CreateUserCommand
+      messenger: 'input'
+      output: false
+      status: 204
+      read: false
+    get:
+      method: GET
+  itemOperations:
+    get:
+      method: GET

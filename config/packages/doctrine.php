@@ -16,10 +16,6 @@ return static function (DoctrineConfig $doctrine) {
     $emDefault->autoMapping(true);
 
     \Core\config\DoctrineConfig::configure($emDefault);
-//    \Translation\config\DoctrineConfig::configure($emDefault);
-//    \Menu\config\DoctrineConfig::configure($emDefault);
-//    \Company\config\DoctrineConfig::configure($emDefault);
-//    \Security\config\DoctrineConfig::configure($emDefault);
-//    \Order\config\DoctrineConfig::configure($emDefault);
-//    \Customization\config\DoctrineConfig::configure($emDefault);
+    \Security\config\DoctrineConfig::configure($emDefault);
+    \Company\config\DoctrineConfig::configure($emDefault);
 };

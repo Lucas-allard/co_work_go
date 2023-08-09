@@ -1,0 +1,12 @@
+api_platform:
+    mapping:
+        paths: [
+            '%kernel.project_dir%/src/Security/src/Presentation/Api',
+        ]
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    exception_to_status:
+        Doctrine\ORM\NoResultException: 404
+        Core\Domain\Exception\NotFoundException: 404

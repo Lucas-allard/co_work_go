@@ -5,13 +5,13 @@ namespace Core\Domain\Contract\Noteable;
 interface NoteableInterface
 {
     /**
-     * @return string|null
+     * @return string
      */
-    public function getNote(): ?string;
+    public function getNote(): string;
 
     /**
-     * @param string|null $note
+     * @param string $note
      * @return $this
      */
-    public function setNote(?string $note): static;
+    public function setNote(string $note): static;
 }

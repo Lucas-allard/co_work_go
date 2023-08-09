@@ -1,0 +1,24 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Company\Domain\Entity\Company" table="company_company" repository-class="Company\Infrastructure\Repository\DoctrineCompanyRepository">
+
+        <indexes>
+            <index columns="slug"/>
+        </indexes>
+
+        <id name="id" type="ulid"/>
+
+        <field name="name"/>
+        <field name="phone"/>
+        <field name="imageUrls" type="simple_array" nullable="true"/>
+        <field name="enabled" type="boolean"/>
+        <field name="currency"/>
+        <field name="locale"/>
+        <field name="timezone"/>
+        <field name="slug" nullable="true" unique="true"/>
+        <field name="optionalFeatures" type="json"/>
+
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,83 @@
+{% extends 'bootstrap_5_horizontal_layout.html.twig' %}
+{#{% use 'Company/_company_form.html.twig' %}#}
+{#{% use 'Customization/_customization_config_items.html.twig' %}#}
+{#{% use 'Order/_component_order_options.html.twig' %}#}
+{% use 'Core/_image_type.html.twig' %}
+{#{% use 'Menu/_category_plannable_planners.html.twig' %}#}
+{#{% use 'Menu/_component_image_type.html.twig' %}#}
+{#{% use 'Menu/_component_options.html.twig' %}#}
+{#{% use 'Menu/_category_options.html.twig' %}#}
+{#{% use 'Menu/_component_orderOptions.html.twig' %}#}
+{#{% use 'Order/_order_config_planners.html.twig' %}#}
+{#{% use 'Order/_order_config_notify_customer_on_statuses.html.twig' %}#}
+{% use 'Core/_checkbox.html.twig' %}
+{#{% use 'Translation/_category_translation.html.twig' %}#}
+{#{% use 'Translation/_component_translation.html.twig' %}#}
+{% block collection_row %}
+    {% if prototype is defined and not prototype.rendered %}
+        {% set row_attr = row_attr|merge({ 'data-prototype': form_row(prototype) }) %}
+    {% endif %}
+
+    {% set row_attr = row_attr|merge({
+        'data-ea-collection-field': 'true',
+        'data-entry-is-complex': form.vars.ea_crud_form.ea_field and form.vars.ea_crud_form.ea_field.customOptions.get('entryIsComplex') ? 'true' : 'false',
+        'data-allow-add': allow_add ? 'true' : 'false',
+        'data-allow-delete': allow_delete ? 'true' : 'false',
+        'data-num-items': form.children|length,
+        'data-form-type-name-placeholder': prototype is defined ? prototype.vars.name : '',
+    }) %}
+
+    {{ block('form_row') }}
+{% endblock collection_row %}
+
+{% block collection_widget %}
+    {{ block('form_widget') }}
+
+    {% if allow_add|default(false) %}
+        <button type="button" class="btn btn-link field-collection-add-button">
+            <i class="fa fa-plus pr-1"></i>
+            {{ 'action.add_new_item'|trans({}, 'EasyAdminBundle') }}
+        </button>
+    {% endif %}
+{% endblock collection_widget %}
+
+{% block collection_entry_widget %}
+    {% set is_complex = form_parent(form).vars.ea_crud_form.ea_field.customOptions.get('entryIsComplex') ?? false %}
+
+    <div class="field-collection-item {{ is_complex ? 'field-collection-item-complex' }}">
+        {{ form_widget(form) }}
+
+        {% if form_parent(form).vars.allow_delete|default(false) %}
+            <button type="button" class="btn btn-link field-collection-delete-button"
+                    title="{{ 'action.remove_item'|trans({}, 'EasyAdminBundle') }}"
+                    onclick="this.closest('.form-group').remove(); return false;">
+                <i class="fas fa-times"></i>
+            </button>
+        {% endif %}
+    </div>
+{% endblock collection_entry_widget %}
+{% block form_widget_compound %}
+    <div class="form-widget">
+    <div class="form-widget-compound">
+        {% if 'collection' in block_prefixes %}
+            {# the "is iterable" check is needed because if an object implements __toString() and
+               returns an empty string, "is empty" returns true even if it's not a collection #}
+            {% set isEmptyCollection = value is null or (value is iterable and value is empty) %}
+            {% if isEmptyCollection %}
+                {{ block('empty_collection') }}
+            {% endif %}
+            {% if isEmptyCollection or form.vars.prototype is defined %}
+                {% set attr = attr|merge({'data-empty-collection': block('empty_collection') }) %}
+            {% endif %}
+        {% endif %}
+
+        {{ parent() }}
+    </div>
+    </div>
+{% endblock form_widget_compound %}
+
+{% block empty_collection %}
+    <div class="empty collection-empty">
+        <span class="badge badge-secondary">{{ 'label.empty'|trans({},'EasyAdminBundle') }}</span>
+    </div>
+{% endblock empty_collection %}
